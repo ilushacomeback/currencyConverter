@@ -1,8 +1,42 @@
-import CurrencyAPI from "@everapi/currencyapi-js"; /*Не удалось найти файл объявления модуля "@everapi/currencyapi-js". 
-"c:/Users/USER/Desktop/pet_proj/currency_converter/node_modules/@everapi/currencyapi-js/index.js" имеет неявный тип "any".
-Попробуйте использовать команду "npm i --save-dev @types/everapi__currencyapi-js", если он существует,
-или добавьте новый файл объявления (.d.ts), содержащий "declare module '@everapi/currencyapi-js';".ts(7016) */
+import CurrencyAPI from "../node_modules/@everapi/currencyapi-js/index.js"
+const currencyApi = new CurrencyAPI("cur_live_mjssoAewc2eBDAW1qAQK27TDYh7ILgh78rEwKBCE");
 
-const currencyApi = new CurrencyAPI(
-  "cur_live_mjssoAewc2eBDAW1qAQK27TDYh7ILgh78rEwKBCE"
-);
+const curValute = document.querySelector('select[name=currencyOne]')
+const nextValute = document.querySelector('select[name=currencyTwo]')
+const form = document.querySelector('.form')
+const input = document.querySelector('input[type=number]')
+const result = document.querySelector('.valute')
+
+const state = {
+    current: 'RUB',
+    next: 'RUB',
+    number: null
+}
+
+const render = (state) => {
+    currencyApi.latest({
+        base_currency: state.current,
+        currencies: state.next
+    }).then((response) => {
+        const currency = response.data[state.next].value
+        const res = Number(state.number) * Number(currency)
+        result.innerHTML = res.toFixed(2)
+        input.value = ''
+    })
+}
+
+input.addEventListener('input', (e) => {
+    e.preventDefault()
+    state.number = e.target.value
+})
+
+curValute.addEventListener('change', (e) => {
+    state.current = e.target.value
+})
+nextValute.addEventListener('change', (e) => {
+    state.next = e.target.value
+})
+form.addEventListener('submit', (e) => {
+    e.preventDefault()
+    render(state)
+})

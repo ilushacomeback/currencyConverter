@@ -13,10 +13,10 @@
       </header>
 
       <main>
-        <form action="">
+        <form action="" class="form">
           <div class="currency-first">
             <input type="number" />
-            <select name="currency">
+            <select name="currencyOne">
               <option value="RUB">RUB</option>
               <option value="USD">USD</option>
               <option value="EUR">EUR</option>
@@ -24,7 +24,7 @@
           </div>
           <div class="currency-second">
             <span>перевести в</span>
-            <select name="currency">
+            <select name="currencyTwo">
               <option value="RUB">RUB</option>
               <option value="USD">USD</option>
               <option value="EUR">EUR</option>
@@ -32,6 +32,7 @@
           </div>
           <div class="result">
             <button class="converter" type="submit">Вычислить</button>
+            <div class="valute"></div>
           </div>
         </form>
       </main>
