@@ -1,4 +1,4 @@
-import CurrencyAPI from "../node_modules/@everapi/currencyapi-js/index.js"
+import CurrencyAPI from "./node_modules/@everapi/currencyapi-js/index.js"
 const currencyApi = new CurrencyAPI("cur_live_mjssoAewc2eBDAW1qAQK27TDYh7ILgh78rEwKBCE");
 
 const curValute = document.querySelector('select[name=currencyOne]')
